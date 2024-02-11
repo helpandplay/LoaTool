@@ -3,11 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:be="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LoaTool.View"
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
-        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}" 
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        AllowsTransparency="True"
+        WindowStartupLocation="Manual"
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}" 
+        Topmost="{Binding IsAlwaysOnTop, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+        Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}"
+        ResizeMode="{Binding ResizeMode, Mode=OneTime}"
+        Top="{Binding Top, Mode=TwoWay}"
+        Left="{Binding Left, Mode=TwoWay}"
+        Opacity="{Binding WindowOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        >
+    <be:Interaction.Triggers>
+        <be:EventTrigger EventName="MouseEnter">
+            <be:CallMethodAction MethodName="OnMouseEnter" TargetObject="{Binding}"/>
+        </be:EventTrigger>
+        <be:EventTrigger EventName="MouseLeave">
+            <be:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
+        </be:EventTrigger>
+    </be:Interaction.Triggers>
     <Grid>
 
     </Grid>
