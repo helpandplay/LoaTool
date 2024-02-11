@@ -1,9 +1,123 @@
-<mxfile host="app.diagrams.net" modified="2024-02-11T12:46:02.002Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" version="20.8.5" etag="L3g4iH2Rof1JAzNQlfGh" type="github">
+<mxfile host="app.diagrams.net" modified="2024-02-11T14:38:32.883Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" version="20.8.5" etag="g9-cqwlP6f6QX-hQd7_I" type="github" pages="2">
   <diagram id="VQfXQYYkZtBjYC85vHR-" name="Structure">
-    <mxGraphModel dx="2314" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="834" dy="1624" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="XCoR89syNJDsksgrEryl-1" value="View" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XCoR89syNJDsksgrEryl-2" target="XCoR89syNJDsksgrEryl-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="XCoR89syNJDsksgrEryl-2" target="XCoR89syNJDsksgrEryl-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-2" value="ViewModel" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-3" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="XCoR89syNJDsksgrEryl-1" target="XCoR89syNJDsksgrEryl-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="430" as="sourcePoint" />
+            <mxPoint x="440" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-4" value="Define" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XCoR89syNJDsksgrEryl-5" target="XCoR89syNJDsksgrEryl-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XCoR89syNJDsksgrEryl-5" value="Util" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="WHGFmPfC16h2CBo8ATUA" name="Design">
+    <mxGraphModel dx="2074" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="021P4Pv_i9rRsHLjH2er-1" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;strokeColor=none;fillColor=#666666;opacity=50;" vertex="1" parent="1">
+          <mxGeometry x="260" y="450" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="270" y="455" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-4" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#666666;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="350" y="455" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-8" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2013/240/iconmonstr-cursor-24.png;" vertex="1" parent="1">
+          <mxGeometry x="277.5" y="462.5" width="35" height="35" as="geometry" />
+        </mxCell>
+        <UserObject label="https://iconmonstr.com/cursor-24-svg/" link="https://iconmonstr.com/cursor-24-svg/" id="021P4Pv_i9rRsHLjH2er-9">
+          <mxCell style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="299" y="160" width="230" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-10" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2013/240/iconmonstr-cursor-24.png;" vertex="1" parent="1">
+          <mxGeometry x="260" y="160" width="35" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-11" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2014/240/iconmonstr-calculator-8.png;" vertex="1" parent="1">
+          <mxGeometry x="260" y="210" width="35" height="35" as="geometry" />
+        </mxCell>
+        <UserObject label="https://iconmonstr.com/calculator-8-svg/" link="https://iconmonstr.com/calculator-8-svg/" id="021P4Pv_i9rRsHLjH2er-12">
+          <mxCell style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="299" y="207.5" width="240" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-13" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2014/240/iconmonstr-calculator-8.png;" vertex="1" parent="1">
+          <mxGeometry x="380" y="462.5" width="35" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-14" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2015/240/iconmonstr-eyedropper-1.png;" vertex="1" parent="1">
+          <mxGeometry x="260" y="260" width="35" height="35" as="geometry" />
+        </mxCell>
+        <UserObject label="https://iconmonstr.com/eyedropper-1-svg/" link="https://iconmonstr.com/eyedropper-1-svg/" id="021P4Pv_i9rRsHLjH2er-15">
+          <mxCell style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="299" y="255" width="250" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-16" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2015/240/iconmonstr-eyedropper-1.png;" vertex="1" parent="1">
+          <mxGeometry x="433" y="462.5" width="35" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-21" value="color picker" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="529" y="255" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-22" value="경매금 계산기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="539" y="210" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-23" value="어플리케이션 이동" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="539" y="162.5" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-26" value="유용한 사이트 바로가기&lt;br&gt;로아 설치 폴더 바로가기" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="549" y="310" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-27" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-magnifier-11.png;" vertex="1" parent="1">
+          <mxGeometry x="260" y="310" width="35" height="35" as="geometry" />
+        </mxCell>
+        <UserObject label="https://iconmonstr.com/magnifier-11-svg/" link="https://iconmonstr.com/magnifier-11-svg/" id="021P4Pv_i9rRsHLjH2er-28">
+          <mxCell style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="299" y="305" width="250" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-29" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2017/240/iconmonstr-magnifier-11.png;" vertex="1" parent="1">
+          <mxGeometry x="487" y="462.5" width="35" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-30" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-gear-1.png;" vertex="1" parent="1">
+          <mxGeometry x="260" y="360" width="35" height="35" as="geometry" />
+        </mxCell>
+        <UserObject label="https://iconmonstr.com/magnifier-11-svg/" link="https://iconmonstr.com/magnifier-11-svg/" id="021P4Pv_i9rRsHLjH2er-31">
+          <mxCell style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="299" y="355" width="250" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-32" value="setting" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="539" y="355" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="021P4Pv_i9rRsHLjH2er-33" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-gear-1.png;" vertex="1" parent="1">
+          <mxGeometry x="540" y="462.5" width="35" height="35" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
