@@ -1,7 +1,7 @@
-﻿<Application x:Class="LoaTool.Main.App"
+﻿<Application x:Class="LoaTool.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LoaTool.Main"
+             xmlns:local="clr-namespace:LoaTool.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
