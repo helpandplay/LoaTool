@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/LoaTool.Define;component/Views/Resources/AppStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LoaTool.Define;component/Views/Resources/AppDefines.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LoaTool.Define;component/Views/Resources/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

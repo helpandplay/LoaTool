@@ -3,14 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:be="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LoaTool.View"
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
         mc:Ignorable="d"
-        AllowsTransparency="True"
-        Background="Transparent"
-        WindowStartupLocation="Manual"
-        WindowStyle="None"
+        x:Name="mainWindow"
+        AllowsTransparency="{StaticResource AppAllowsTransparency}"
+        Background="{StaticResource AppBackground}"
+        WindowStartupLocation="{StaticResource AppWindowStartupLocation}"
+        WindowStyle="{StaticResource AppWindowStyle}"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}" 
         Topmost="{StaticResource AppAlwaysOnTop}"
         Width="{StaticResource AppWidth}" 
@@ -18,17 +19,31 @@
         ResizeMode="{StaticResource AppResizeMode}"
         Opacity="{StaticResource AppOpacity}"
         >
-    <be:Interaction.Triggers>
-        <be:EventTrigger EventName="MouseEnter">
-            <be:CallMethodAction MethodName="OnMouseEnter" TargetObject="{Binding}"/>
-        </be:EventTrigger>
-        <be:EventTrigger EventName="MouseLeave">
-            <be:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
-        </be:EventTrigger>
-    </be:Interaction.Triggers>
-    <Border CornerRadius="25" Background="Blue" Padding="20">
-        <Grid Background="Red">
-            
-        </Grid>
+    <Border CornerRadius="{StaticResource AppCornerRadius}" Background="Blue" Padding="{StaticResource AppPadding}">
+        <StackPanel Orientation="Horizontal"
+                    Margin="10,0,10,0">
+            <Button Style="{StaticResource IconButton}"
+                    Width="{StaticResource IconWidth}" 
+                    Height="{StaticResource IconHeight}">
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="MouseEnter">
+                        <behavior:CallMethodAction MethodName="OnMouseEnter" TargetObject="{Binding}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="MouseLeave">
+                        <behavior:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <behavior:InvokeCommandAction Command="{Binding DragIconMouseDownCommand}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+                <Image Source="{StaticResource Icon_Drag}"/>
+            </Button>
+            <StackPanel Orientation="Horizontal"
+                        Margin="30,0,0,0">
+                <Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}">
+
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Border>
 </Window>

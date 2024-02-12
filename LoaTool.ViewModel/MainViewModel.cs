@@ -23,6 +23,7 @@ public partial class MainViewModel : ObservableObject
         _isMouseEnter = true;
         System.Diagnostics.Debug.WriteLine($"isMouseEnter: {_isMouseEnter}");
     }
+
     /// <summary>
     /// MainWindow.xaml / OnMouseLeave
     /// </summary>
@@ -33,6 +34,12 @@ public partial class MainViewModel : ObservableObject
         if(!_isMouseEnter) return;
         _isMouseEnter = false;
         System.Diagnostics.Debug.WriteLine($"isMouseEnter: {_isMouseEnter}");
+    }
+
+    [RelayCommand]
+    private void DragIconMouseDown()
+    {
+        System.Diagnostics.Debug.WriteLine($"Mouse left button down: {_isMouseEnter}");
     }
 }
 
