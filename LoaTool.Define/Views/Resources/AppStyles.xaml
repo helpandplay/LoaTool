@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:Double x:Key="AppWidth">200</sys:Double>
+    <sys:Double x:Key="AppHeight">50</sys:Double>
+    <sys:Double x:Key="AppOpacity">0.5</sys:Double>
+    <sys:Int32 x:Key="AppCornerRadius">25</sys:Int32>
+    <sys:Int32 x:Key="AppPadding">10</sys:Int32>
+    <sys:Boolean x:Key="AppAlwaysOnTop">True</sys:Boolean>
+    <ResizeMode x:Key="AppResizeMode">NoReSize</ResizeMode>
+</ResourceDictionary>

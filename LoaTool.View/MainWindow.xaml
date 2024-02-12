@@ -8,15 +8,15 @@
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
         mc:Ignorable="d"
         AllowsTransparency="True"
+        Background="Transparent"
         WindowStartupLocation="Manual"
         WindowStyle="None"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}" 
-        Topmost="{Binding IsAlwaysOnTop, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-        Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}"
-        ResizeMode="{Binding ResizeMode, Mode=OneTime}"
-        Top="{Binding Top, Mode=TwoWay}"
-        Left="{Binding Left, Mode=TwoWay}"
-        Opacity="{Binding WindowOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Topmost="{StaticResource AppAlwaysOnTop}"
+        Width="{StaticResource AppWidth}" 
+        Height="{StaticResource AppHeight}"
+        ResizeMode="{StaticResource AppResizeMode}"
+        Opacity="{StaticResource AppOpacity}"
         >
     <be:Interaction.Triggers>
         <be:EventTrigger EventName="MouseEnter">
@@ -26,7 +26,9 @@
             <be:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
         </be:EventTrigger>
     </be:Interaction.Triggers>
-    <Grid>
-
-    </Grid>
+    <Border CornerRadius="25" Background="Blue" Padding="20">
+        <Grid Background="Red">
+            
+        </Grid>
+    </Border>
 </Window>

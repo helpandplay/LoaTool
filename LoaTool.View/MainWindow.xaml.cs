@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LoaTool.Util;
 using LoaTool.ViewModel;
 
 namespace LoaTool.View;
@@ -20,5 +21,9 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = App.Current.Services.GetService(typeof(MainViewModel));
+        Define.View.WindowLocation windowLocation = ViewUtil.GetWindowLocation(Width);
+
+        Left = windowLocation.Left;
+        Top = windowLocation.Top;
     }
 }

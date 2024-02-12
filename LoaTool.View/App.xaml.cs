@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
 using LoaTool.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,7 @@ public sealed partial class App : Application
 {
     public App()
     {
-        Services = ConfigurationServices;
+        Services = IocService;
     }
 
     /// <summary>
@@ -25,7 +26,7 @@ public sealed partial class App : Application
     /// </summary>
     public IServiceProvider Services { get; }
 
-    private static IServiceProvider ConfigurationServices
+    private static IServiceProvider IocService
     {
         get
         {
