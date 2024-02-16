@@ -10,7 +10,11 @@ namespace LoaTool.ViewModel;
 
 public partial class MainViewModel : ObservableObject
 {
+    [ObservableProperty]
     private bool _isMouseEnter = false;
+
+    [ObservableProperty]
+    private bool _isClickLeftMouseButton = false;
 
     /// <summary>
     /// MainWindow.xaml / OnMouseEnter
@@ -19,9 +23,9 @@ public partial class MainViewModel : ObservableObject
     /// <param name="e"></param>
     public void OnMouseEnter(object sender, MouseEventArgs e)
     {
-        if(_isMouseEnter) return;
-        _isMouseEnter = true;
-        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {_isMouseEnter}");
+        if(IsMouseEnter) return;
+        IsMouseEnter = true;
+        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {IsMouseEnter}");
     }
 
     /// <summary>
@@ -31,15 +35,19 @@ public partial class MainViewModel : ObservableObject
     /// <param name="e"></param>
     public void OnMouseLeave(object sender, MouseEventArgs e)
     {
-        if(!_isMouseEnter) return;
-        _isMouseEnter = false;
-        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {_isMouseEnter}");
+        if(!IsMouseEnter) return;
+        IsMouseEnter = false;
+        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {IsMouseEnter}");
     }
 
     [RelayCommand]
-    private void DragIconMouseDown()
+    private void DragIconMouseDown(Window window)
     {
-        System.Diagnostics.Debug.WriteLine($"Mouse left button down: {_isMouseEnter}");
+        if(!IsMouseEnter) return;
+        IsClickLeftMouseButton = true;
+        System.Diagnostics.Debug.WriteLine($"Mouse left button down: {IsMouseEnter}");
+        window.DragMove();
+        IsClickLeftMouseButton = false;
     }
 }
 

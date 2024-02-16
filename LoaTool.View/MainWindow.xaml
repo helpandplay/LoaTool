@@ -22,9 +22,18 @@
     <Border CornerRadius="{StaticResource AppCornerRadius}" Background="Blue" Padding="{StaticResource AppPadding}">
         <StackPanel Orientation="Horizontal"
                     Margin="10,0,10,0">
-            <Button Style="{StaticResource IconButton}"
-                    Width="{StaticResource IconWidth}" 
+            <Button Width="{StaticResource IconWidth}" 
                     Height="{StaticResource IconHeight}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButton}">
+                        <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Cursor" Value="{StaticResource CursorGrabbing}"/>
+                            </DataTrigger>
+                        </Style.Triggers>    
+                    </Style>
+                </Button.Style>
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="MouseEnter">
                         <behavior:CallMethodAction MethodName="OnMouseEnter" TargetObject="{Binding}"/>
@@ -33,7 +42,7 @@
                         <behavior:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
                     </behavior:EventTrigger>
                     <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <behavior:InvokeCommandAction Command="{Binding DragIconMouseDownCommand}"/>
+                        <behavior:InvokeCommandAction Command="{Binding DragIconMouseDownCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
                 <Image Source="{StaticResource Icon_Drag}"/>

@@ -2,6 +2,7 @@
 using System.Data;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 using LoaTool.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +37,23 @@ public sealed partial class App : Application
 
             return services.BuildServiceProvider();
         }
+    }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        var cursorGrabStream = GetResourceStream(new Uri("pack://application:,,,/LoaTool.Define;component/Views/Resources/Cursors/grab.cur"));
+        var cursorGrabbingStream = GetResourceStream(new Uri("pack://application:,,,/LoaTool.Define;component/Views/Resources/Cursors/grabbing.cur"));
+
+        if(cursorGrabStream == null || cursorGrabbingStream == null)
+        {
+            throw new ResourceReferenceKeyNotFoundException();
+        }
+
+        var cursorGrab = new Cursor(cursorGrabStream.Stream);
+        var cursorGrabbing = new Cursor(cursorGrabbingStream.Stream);
+        Resources.Add("CursorGrab", cursorGrab);
+        Resources.Add("CursorGrabbing", cursorGrabbing);
     }
 }
 

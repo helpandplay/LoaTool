@@ -15,4 +15,7 @@
 
     <sys:Double x:Key="IconWidth">30</sys:Double>
     <sys:Double x:Key="IconHeight">30</sys:Double>
+
+    <!--<Cursor x:Key="CursorGrab">Cursors/grab.cur</Cursor>
+    <Cursor x:Key="CursorGrabbing">Cursors/grab.cur</Cursor>-->
 </ResourceDictionary>

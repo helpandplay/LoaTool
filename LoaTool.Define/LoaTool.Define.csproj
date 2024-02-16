@@ -7,4 +7,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Resources\Cursors\grab.cur" />
+    <None Remove="Views\Resources\Cursors\grabbing.cur" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Resources\Cursors\grab.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Resources\Cursors\grabbing.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>
