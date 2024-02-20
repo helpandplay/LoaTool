@@ -29,16 +29,23 @@ public class DialogService : IDialogService
         }
     }
 
-    public void Close<TContext>(TContext context) where TContext : IContext
+    public void Close<TContext>(TContext targetContext) where TContext : IContext
     {
         Close((T) =>
         {
-            var dataContext = T.DataContext as IDialogContext;
-            if(dataContext == null)
+            var dataContext = T.DataContext;
+
+            if(dataContext is IDialogContext dialogContext)
             {
-                throw new NullReferenceException(T.GetType().Name + " is not IDialogContext type.");
+                return dialogContext.Context.Equals(targetContext);
             }
-            return dataContext.Context.Equals(context);
+
+            if(dataContext is IContext context)
+            {
+                return context.Equals(targetContext);
+            }
+
+            throw new NullReferenceException(T.GetType().Name + " is not type.");
         });
     }
 
