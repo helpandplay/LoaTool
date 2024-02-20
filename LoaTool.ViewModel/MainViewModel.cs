@@ -2,19 +2,25 @@
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using LoaTool.Define.Interfaces;
 using LoaTool.Define.View;
 using LoaTool.Util;
 
 namespace LoaTool.ViewModel;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel(IDialogService dialogService,
+    ColorPickerViewModel colorPickerViewModel) : ObservableObject
 {
     [ObservableProperty]
     private bool _isMouseEnter = false;
 
     [ObservableProperty]
     private bool _isClickLeftMouseButton = false;
+
+    private readonly IDialogService _dialogService = dialogService;
+    private readonly ColorPickerViewModel colorPickerViewModel = colorPickerViewModel;
 
     /// <summary>
     /// MainWindow.xaml / OnMouseEnter
@@ -41,13 +47,19 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void DragIconMouseDown(Window window)
+    private void ClickDrag(Window window)
     {
         if(!IsMouseEnter) return;
         IsClickLeftMouseButton = true;
         System.Diagnostics.Debug.WriteLine($"Mouse left button down: {IsMouseEnter}");
         window.DragMove();
         IsClickLeftMouseButton = false;
+    }
+
+    [RelayCommand]
+    private void ClickColorPicker()
+    {
+        _dialogService.Show(colorPickerViewModel);
     }
 }
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LoaTool.Define\LoaTool.Define.csproj" />
+    <ProjectReference Include="..\LoaTool.Util\LoaTool.Util.csproj" />
     <ProjectReference Include="..\LoaTool.ViewModel\LoaTool.ViewModel.csproj" />
   </ItemGroup>
 

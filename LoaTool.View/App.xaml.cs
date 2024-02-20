@@ -3,6 +3,9 @@ using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using LoaTool.Define.Interfaces;
+using LoaTool.Util;
 using LoaTool.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,32 +15,10 @@ namespace LoaTool.View;
 /// </summary>
 public sealed partial class App : Application
 {
-    public App()
-    {
-        Services = IocService;
-    }
-
     /// <summary>
     /// Gets the current <see cref="App"/> instance in use
     /// </summary>
     public new static App Current => (App)Application.Current;
-
-    /// <summary>
-    /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
-    /// </summary>
-    public IServiceProvider Services { get; }
-
-    private static IServiceProvider IocService
-    {
-        get
-        {
-            var services = new ServiceCollection();
-
-            services.AddSingleton<MainViewModel>();
-
-            return services.BuildServiceProvider();
-        }
-    }
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -54,6 +35,32 @@ public sealed partial class App : Application
         var cursorGrabbing = new Cursor(cursorGrabbingStream.Stream);
         Resources.Add("CursorGrab", cursorGrab);
         Resources.Add("CursorGrabbing", cursorGrabbing);
+
+        RegistServices();
+        RegistDialog();
+    }
+
+    private void RegistServices()
+    {
+        var services = new ServiceCollection();
+
+        services.AddSingleton<MainViewModel>();
+        services.AddSingleton<ColorPickerViewModel>();
+        services.AddSingleton<IDialogService, DialogService>();
+
+        ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+        Ioc.Default.ConfigureServices(serviceProvider);
+    }
+
+    private void RegistDialog()
+    {
+        IDialogService? dialogService = Ioc.Default.GetService<IDialogService>();
+
+        if(dialogService != null)
+        {
+            dialogService.Register<ColorPickerWindow>();
+        }
     }
 }
 

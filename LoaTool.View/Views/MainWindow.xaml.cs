@@ -8,19 +8,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using LoaTool.Define.Interfaces;
 using LoaTool.Util;
 using LoaTool.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LoaTool.View;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow : Window, IDialog
 {
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = App.Current.Services.GetService(typeof(MainViewModel));
+        DataContext = Ioc.Default.GetService<MainViewModel>();
         Define.View.WindowLocation windowLocation = ViewUtil.GetWindowLocation(Width);
 
         Left = windowLocation.Left;

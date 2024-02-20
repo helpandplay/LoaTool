@@ -19,7 +19,9 @@
         ResizeMode="{StaticResource AppResizeMode}"
         Opacity="{StaticResource AppOpacity}"
         >
-    <Border CornerRadius="{StaticResource AppCornerRadius}" Background="Blue" Padding="{StaticResource AppPadding}">
+    <Border CornerRadius="{StaticResource AppCornerRadius}" 
+            Background="Blue" 
+            Padding="{StaticResource AppPadding}">
         <StackPanel Orientation="Horizontal"
                     Margin="10,0,10,0">
             <Button Width="{StaticResource IconWidth}" 
@@ -42,15 +44,16 @@
                         <behavior:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
                     </behavior:EventTrigger>
                     <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <behavior:InvokeCommandAction Command="{Binding DragIconMouseDownCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                        <behavior:InvokeCommandAction Command="{Binding ClickDragCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
                 <Image Source="{StaticResource Icon_Drag}"/>
             </Button>
             <StackPanel Orientation="Horizontal"
                         Margin="30,0,0,0">
-                <Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}">
-
+                <Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}"
+                        Command="{Binding ClickColorPickerCommand}">
+                    <Image Source="{StaticResource Icon_ColorPicker}"/>
                 </Button>
             </StackPanel>
         </StackPanel>
