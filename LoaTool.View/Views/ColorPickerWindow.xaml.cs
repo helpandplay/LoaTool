@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using LoaTool.Define.Interfaces;
+using LoaTool.Util;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LoaTool.View;
@@ -23,5 +25,21 @@ public partial class ColorPickerWindow : Window, IDialog
     public ColorPickerWindow()
     {
         InitializeComponent();
+    }
+
+    public void Positioning(IDialog? parent = null)
+    {
+        Define.View.WindowLocation windowLocation = ViewUtil.GetWindowLocation(Width);
+
+        double left = windowLocation.Left;
+        double top = windowLocation.Top;
+
+        if(parent != null)
+        {
+            top += parent.Height;
+        }
+
+        Left = left;
+        Top = top;
     }
 }

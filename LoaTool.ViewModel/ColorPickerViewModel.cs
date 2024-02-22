@@ -19,11 +19,21 @@ public partial class ColorPickerViewModel : ObservableObject, IContext
     }
 
     [RelayCommand]
-    private void OffColorPicker()
+    private void Exit()
     {
         if(_dialogService != null)
         {
             _dialogService.Close(this);
         } 
+    }
+
+    [RelayCommand]
+    private void Execute(IDialog dialog)
+    {
+        if(_dialogService != null)
+        {
+            IDialog mainDialog = _dialogService.GetDialog<MainViewModel>();
+            dialog.Positioning(mainDialog);
+        }
     }
 }

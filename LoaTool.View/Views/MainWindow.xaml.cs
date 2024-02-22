@@ -24,6 +24,10 @@ public partial class MainWindow : Window, IDialog
     {
         InitializeComponent();
         DataContext = Ioc.Default.GetService<MainViewModel>();
+    }
+
+    public void Positioning(IDialog? parent = null)
+    {
         Define.View.WindowLocation windowLocation = ViewUtil.GetWindowLocation(Width);
 
         Left = windowLocation.Left;

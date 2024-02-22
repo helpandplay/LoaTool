@@ -15,4 +15,5 @@ public interface IDialogService : IDisposable
     void Close<TContext>(TContext context) where TContext : IContext;
     void Close<TContext, TDialog>(TContext context) where TContext : IContext where TDialog : IDialog;
     void Clear();
+    IDialog GetDialog<TContext>() where TContext : class, IContext;
 }

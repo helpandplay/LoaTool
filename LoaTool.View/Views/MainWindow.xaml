@@ -19,6 +19,11 @@
         ResizeMode="{StaticResource AppResizeMode}"
         Opacity="{StaticResource AppOpacity}"
         >
+    <behavior:Interaction.Triggers>
+        <behavior:EventTrigger EventName="Loaded">
+            <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+        </behavior:EventTrigger>
+    </behavior:Interaction.Triggers>
     <Border CornerRadius="{StaticResource AppCornerRadius}" 
             Background="Blue" 
             Padding="{StaticResource AppPadding}">

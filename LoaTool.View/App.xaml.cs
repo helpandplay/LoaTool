@@ -22,7 +22,6 @@ public sealed partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
         var cursorGrabStream = GetResourceStream(new Uri("pack://application:,,,/LoaTool.Define;component/Views/Resources/Cursors/grab.cur"));
         var cursorGrabbingStream = GetResourceStream(new Uri("pack://application:,,,/LoaTool.Define;component/Views/Resources/Cursors/grabbing.cur"));
 
@@ -38,6 +37,14 @@ public sealed partial class App : Application
 
         RegistServices();
         RegistDialog();
+
+        IDialogService? dialogService = Ioc.Default.GetService<IDialogService>();
+        MainViewModel? mainViewModel = Ioc.Default.GetService<MainViewModel>();
+        if(dialogService != null &&
+            mainViewModel != null)
+        {
+            dialogService.Show(mainViewModel);
+        }
     }
 
     private void RegistServices()
@@ -59,6 +66,7 @@ public sealed partial class App : Application
 
         if(dialogService != null)
         {
+            dialogService.Register<MainWindow>();
             dialogService.Register<ColorPickerWindow>();
         }
     }

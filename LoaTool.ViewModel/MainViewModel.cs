@@ -11,7 +11,7 @@ using LoaTool.Util;
 namespace LoaTool.ViewModel;
 
 public partial class MainViewModel(IDialogService dialogService,
-    ColorPickerViewModel colorPickerViewModel) : ObservableObject
+    ColorPickerViewModel colorPickerViewModel) : ObservableObject, IContext
 {
     [ObservableProperty]
     private bool _isMouseEnter = false;
@@ -44,6 +44,11 @@ public partial class MainViewModel(IDialogService dialogService,
         if(!IsMouseEnter) return;
         IsMouseEnter = false;
         System.Diagnostics.Debug.WriteLine($"isMouseEnter: {IsMouseEnter}");
+    }
+    [RelayCommand]
+    private void Execute(IDialog dialog)
+    {
+        dialog.Positioning();
     }
 
     [RelayCommand]

@@ -7,13 +7,17 @@
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
         mc:Ignorable="d"
+        x:Name="ColorPicker"
         Title="ColorPickerWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:ColorPickerViewModel/>
     </Window.DataContext>
     <behavior:Interaction.Triggers>
         <behavior:EventTrigger EventName="Deactivated">
-            <behavior:InvokeCommandAction Command="{Binding OffColorPickerCommand}"/>
+            <behavior:InvokeCommandAction Command="{Binding ExitCommand}"/>
+        </behavior:EventTrigger>
+        <behavior:EventTrigger EventName="Loaded">
+            <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
         </behavior:EventTrigger>
     </behavior:Interaction.Triggers>
     <Grid>
