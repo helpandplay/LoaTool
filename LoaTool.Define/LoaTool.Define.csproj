@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Colors\" />
     <Folder Include="NewFolder\" />
+    <Folder Include="Views\Controls\" />
   </ItemGroup>
 
 </Project>

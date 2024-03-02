@@ -8,7 +8,14 @@
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
         mc:Ignorable="d"
         x:Name="ColorPicker"
-        Title="ColorPickerWindow" Height="450" Width="800">
+        WindowStyle="{StaticResource AppWindowStyle}"
+        Width="{StaticResource ColorPickerWidth}"
+        Height="{StaticResource ColorPickerHeight}"
+        ResizeMode="{StaticResource AppResizeMode}"
+        Background="{StaticResource AppBackground}"
+        AllowsTransparency="{StaticResource AppAllowsTransparency}"
+        Topmost="{Binding IsPin}"
+        >
     <Window.DataContext>
         <vm:ColorPickerViewModel/>
     </Window.DataContext>
@@ -20,7 +27,71 @@
             <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
         </behavior:EventTrigger>
     </behavior:Interaction.Triggers>
-    <Grid>
-        
-    </Grid>
+    <Border Padding="10 0" CornerRadius="10" Background="Red">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Cursor" Value="{StaticResource CursorGrabbing}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="MouseEnter">
+                        <behavior:InvokeCommandAction Command="{Binding ReadyDragCommand}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="MouseLeave">
+                        <behavior:InvokeCommandAction Command="{Binding NoReadyDragCommand}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <behavior:InvokeCommandAction Command="{Binding ActiveDragCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+                <TextBlock Text="Color Picker" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Command="{Binding PinningCommand}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleBarButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Pinned}" Value="False">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <Image Source="{StaticResource Icon_Pin}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Pinned}" Value="True">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <Image Source="{StaticResource Icon_UnPin}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Style="{StaticResource TitleBarButton}" Margin="5 0 0 0">
+                        <Image Source="{StaticResource Icon_Close}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

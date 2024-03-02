@@ -8,15 +8,15 @@
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
         mc:Ignorable="d"
         x:Name="mainWindow"
-        AllowsTransparency="{StaticResource AppAllowsTransparency}"
         Background="{StaticResource AppBackground}"
-        WindowStartupLocation="{StaticResource AppWindowStartupLocation}"
+        ResizeMode="{StaticResource AppResizeMode}"
         WindowStyle="{StaticResource AppWindowStyle}"
+        AllowsTransparency="{StaticResource AppAllowsTransparency}"
+        WindowStartupLocation="{StaticResource AppWindowStartupLocation}"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}" 
         Topmost="{StaticResource AppAlwaysOnTop}"
         Width="{StaticResource AppWidth}" 
         Height="{StaticResource AppHeight}"
-        ResizeMode="{StaticResource AppResizeMode}"
         Opacity="{StaticResource AppOpacity}"
         >
     <behavior:Interaction.Triggers>
@@ -43,13 +43,13 @@
                 </Button.Style>
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="MouseEnter">
-                        <behavior:CallMethodAction MethodName="OnMouseEnter" TargetObject="{Binding}"/>
+                        <behavior:InvokeCommandAction Command="{Binding ReadyDragCommand}"/>
                     </behavior:EventTrigger>
                     <behavior:EventTrigger EventName="MouseLeave">
-                        <behavior:CallMethodAction MethodName="OnMouseLeave" TargetObject="{Binding}"/>
+                        <behavior:InvokeCommandAction Command="{Binding NoReadyDragCommand}"/>
                     </behavior:EventTrigger>
                     <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <behavior:InvokeCommandAction Command="{Binding ClickDragCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                        <behavior:InvokeCommandAction Command="{Binding ActiveDragCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
                 <Image Source="{StaticResource Icon_Drag}"/>
@@ -57,7 +57,7 @@
             <StackPanel Orientation="Horizontal"
                         Margin="30,0,0,0">
                 <Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}"
-                        Command="{Binding ClickColorPickerCommand}">
+                        Command="{Binding RunColorPickerCommand}">
                     <Image Source="{StaticResource Icon_ColorPicker}"/>
                 </Button>
             </StackPanel>

@@ -9,31 +9,33 @@ using CommunityToolkit.Mvvm.Input;
 using LoaTool.Define.Interfaces;
 
 namespace LoaTool.ViewModel;
-public partial class ColorPickerViewModel : ObservableObject, IContext
+public partial class ColorPickerViewModel : DialogViewModelBase, IContext
 {
-    private readonly IDialogService? _dialogService;
-
-    public ColorPickerViewModel()
-    {
-        _dialogService = Ioc.Default.GetService<IDialogService>();
-    }
+    [ObservableProperty]
+    private bool _pinned;
 
     [RelayCommand]
     private void Exit()
     {
-        if(_dialogService != null)
+        if(_dialogService != null && !Pinned)
         {
             _dialogService.Close(this);
         } 
     }
 
     [RelayCommand]
-    private void Execute(IDialog dialog)
+    protected override void Execute(IDialog dialog)
     {
         if(_dialogService != null)
         {
             IDialog mainDialog = _dialogService.GetDialog<MainViewModel>();
             dialog.Positioning(mainDialog);
         }
+    }
+
+    [RelayCommand]
+    private void Pinning()
+    {
+        Pinned = !Pinned;
     }
 }

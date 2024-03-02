@@ -10,59 +10,23 @@ using LoaTool.Util;
 
 namespace LoaTool.ViewModel;
 
-public partial class MainViewModel(IDialogService dialogService,
-    ColorPickerViewModel colorPickerViewModel) : ObservableObject, IContext
+public partial class MainViewModel : DialogViewModelBase, IContext
 {
-    [ObservableProperty]
-    private bool _isMouseEnter = false;
+    private readonly ColorPickerViewModel colorPickerViewModel;
 
-    [ObservableProperty]
-    private bool _isClickLeftMouseButton = false;
-
-    private readonly IDialogService _dialogService = dialogService;
-    private readonly ColorPickerViewModel colorPickerViewModel = colorPickerViewModel;
-
-    /// <summary>
-    /// MainWindow.xaml / OnMouseEnter
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public void OnMouseEnter(object sender, MouseEventArgs e)
+    public MainViewModel(ColorPickerViewModel colorPickerViewModel)
     {
-        if(IsMouseEnter) return;
-        IsMouseEnter = true;
-        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {IsMouseEnter}");
-    }
-
-    /// <summary>
-    /// MainWindow.xaml / OnMouseLeave
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public void OnMouseLeave(object sender, MouseEventArgs e)
-    {
-        if(!IsMouseEnter) return;
-        IsMouseEnter = false;
-        System.Diagnostics.Debug.WriteLine($"isMouseEnter: {IsMouseEnter}");
-    }
-    [RelayCommand]
-    private void Execute(IDialog dialog)
-    {
-        dialog.Positioning();
+        this.colorPickerViewModel = colorPickerViewModel;
     }
 
     [RelayCommand]
-    private void ClickDrag(Window window)
+    protected override void Execute(IDialog dialog)
     {
-        if(!IsMouseEnter) return;
-        IsClickLeftMouseButton = true;
-        System.Diagnostics.Debug.WriteLine($"Mouse left button down: {IsMouseEnter}");
-        window.DragMove();
-        IsClickLeftMouseButton = false;
+        dialog?.Positioning();
     }
 
     [RelayCommand]
-    private void ClickColorPicker()
+    private void RunColorPicker()
     {
         _dialogService.Show(colorPickerViewModel);
     }
