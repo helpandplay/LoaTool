@@ -22,9 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Colors\" />
-    <Folder Include="NewFolder\" />
     <Folder Include="Views\Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

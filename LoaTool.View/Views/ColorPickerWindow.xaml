@@ -14,7 +14,7 @@
         ResizeMode="{StaticResource AppResizeMode}"
         Background="{StaticResource AppBackground}"
         AllowsTransparency="{StaticResource AppAllowsTransparency}"
-        Topmost="{Binding IsPin}"
+        Topmost="{Binding Pinned}"
         >
     <Window.DataContext>
         <vm:ColorPickerViewModel/>
@@ -27,25 +27,26 @@
             <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
         </behavior:EventTrigger>
     </behavior:Interaction.Triggers>
-    <Border Padding="10 0" CornerRadius="10" Background="Red">
+    <Border Padding="15 5" CornerRadius="10" Background="White">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="140"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
 
             <Grid>
-                <Grid.Style>
-                    <Style TargetType="{x:Type Grid}">
-                        <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                <Setter Property="Cursor" Value="{StaticResource CursorGrabbing}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
+                <TextBlock Text="Color Picker" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Cursor" Value="{StaticResource CursorGrabbing}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="MouseEnter">
                         <behavior:InvokeCommandAction Command="{Binding ReadyDragCommand}"/>
@@ -56,8 +57,8 @@
                     <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
                         <behavior:InvokeCommandAction Command="{Binding ActiveDragCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
                     </behavior:EventTrigger>
-                </behavior:Interaction.Triggers>
-                <TextBlock Text="Color Picker" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
+                </behavior:Interaction.Triggers>    
+                </TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button Command="{Binding PinningCommand}">
                         <Button.Style>
@@ -87,10 +88,52 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
-                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="Aqua">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Button Content="Pick" Style="{StaticResource IconContentButton}" Command="{Binding PickColorCommand}"/>
+                        <Button Content="Copy" Style="{StaticResource IconContentButton}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Margin="30 15 0 0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="R"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="G"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="B"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0"/>
+                    </Grid>
+                </Grid>
             </Grid>
-            <StackPanel Orientation="Horizontal">
-                
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 10 0 0">
+                <ListView ItemsSource="{Binding ColorHistories}" FlowDirection="LeftToRight"/>
             </StackPanel>
         </Grid>
     </Border>

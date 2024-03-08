@@ -1,10 +1,12 @@
 
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using LoaTool.Define.View;
 
 namespace LoaTool.Util;
 
-public class ViewUtil
+public partial class ViewUtil
 {
     public static WindowLocation GetWindowLocation(double applicationWidth, double applicationTop = 0.0)
     {

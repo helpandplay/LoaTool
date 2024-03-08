@@ -14,6 +14,7 @@ public class DialogService : IDialogService
     private IList<Type> _dialogTypes = new List<Type>();
     private IList<IDialog> _openedDialogs = new List<IDialog>();
 
+
     public void Clear()
     {
         foreach (var item in _openedDialogs)
@@ -63,7 +64,7 @@ public class DialogService : IDialogService
         });
     }
 
-    public void Dispose()
+    public void DeActivate()
     {
         this.Clear();
     }
@@ -196,5 +197,10 @@ public class DialogService : IDialogService
 
             return T.Name.Replace(VIEW_NAME_TAG, string.Empty).Equals(context.GetType().Name.Replace(VIEWMODEL_NAME_TAG, string.Empty));
         };
+    }
+
+    public void Dispose()
+    {
+        this.Clear();
     }
 }
