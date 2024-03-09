@@ -7,24 +7,28 @@ using System.Windows.Input;
 using Gma.System.MouseKeyHook;
 using LoaTool.Define.Colors;
 
+using MediaColor = System.Windows.Media.Color;
+using SolidColorBrush = System.Windows.Media.SolidColorBrush;
+using DrawingColor = System.Drawing.Color;
+
 namespace LoaTool.Util;
 public class ColorExtractor
 {
     private IKeyboardMouseEvents _mouseHook;
 
-    private Action<System.Drawing.Color>? CaptureColor { get; set; }
+    private Action<SolidColorBrush>? CaptureColor { get; set; }
     private Action? FinishColor { get; set; }
     private int mouseTracker;
     private readonly int CAPTURE_INTERNAL = 3;
 
-    public void Activate(Action<System.Drawing.Color> capturer, Action finisher)
+    public void Activate(Action<SolidColorBrush> capturer, Action finisher)
     {
         this.CaptureColor = capturer;
         this.FinishColor = finisher;
 
         this._mouseHook = Hook.GlobalEvents();
 
-        Mouse.SetCursor(Cursors.Cross);
+        Mouse.OverrideCursor = Cursors.Cross;
         _mouseHook.MouseMove += MouseMoveHooker;
         _mouseHook.MouseDown += MouseDownHooker;
     }
@@ -33,13 +37,17 @@ public class ColorExtractor
     {
         if(CaptureColor != null)
         {
-            System.Drawing.Color color = GetPixelColor(e);
-            CaptureColor(color);
+            System.Diagnostics.Trace.WriteLine("Mouse Down: Cature Color");
+            SolidColorBrush colorBrush = GetPixelColorBrush(e);
+            CaptureColor(colorBrush);
         }
         
         if(FinishColor != null)
         {
+            System.Diagnostics.Trace.WriteLine("Mouse Down: Finish Color");
+            Mouse.OverrideCursor = Cursors.Arrow;
             FinishColor();
+            DeActivate();
         }
     }
 
@@ -48,8 +56,9 @@ public class ColorExtractor
         
         if(CanCapture() && CaptureColor != null)
         {
-            System.Drawing.Color color = GetPixelColor(e);
-            CaptureColor(color);
+            System.Diagnostics.Trace.WriteLine("Mouse Move: Cature Color");
+            SolidColorBrush colorBrush = GetPixelColorBrush(e);
+            CaptureColor(colorBrush);
         }
     }
 
@@ -74,10 +83,17 @@ public class ColorExtractor
         FinishColor = null;
 
         _mouseHook.Dispose();
+        System.Diagnostics.Trace.WriteLine("Color Extractor: DeActivate");
     }
 
-    private System.Drawing.Color GetPixelColor(System.Windows.Forms.MouseEventArgs e)
+    private DrawingColor GetPixelColor(System.Windows.Forms.MouseEventArgs e)
     {
         return new Pixel(e.X, e.Y).Get();
+    }
+
+    private SolidColorBrush GetPixelColorBrush(System.Windows.Forms.MouseEventArgs e)
+    {
+        DrawingColor color = GetPixelColor(e);
+        return new SolidColorBrush(MediaColor.FromArgb(color.A, color.R, color.G, color.B));
     }
 }
