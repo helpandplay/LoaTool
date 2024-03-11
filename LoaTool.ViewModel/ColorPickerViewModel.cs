@@ -20,6 +20,7 @@ using LoaTool.Util;
 namespace LoaTool.ViewModel;
 public partial class ColorPickerViewModel : DialogViewModelBase, IContext
 {
+    private readonly int MAX_COLOR_HISTORIES = 18;
     private readonly ColorExtractor? colorExtractor;
 
     [ObservableProperty]
@@ -36,11 +37,8 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
             System.Windows.Media.Color color = _color.Color;
             if(color.R != value.Color.R || color.G != value.Color.G || color.B != value.Color.B)
             {
+                System.Diagnostics.Trace.WriteLine("Color Change");
                 SetProperty(ref _color, value);
-                Red = value.Color.R;
-                Green = value.Color.G;
-                Blue = value.Color.B;
-                NoteColor(value);
             }
         }
     }
@@ -53,8 +51,8 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value !=  _red)
             {
+                System.Diagnostics.Trace.WriteLine("Red Change");
                 SetProperty(ref _red, value);
-                Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)value, (byte)Green, (byte)Blue));
             }
         }
     }
@@ -67,8 +65,8 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value != _green)
             {
+                System.Diagnostics.Trace.WriteLine("Green Change");
                 SetProperty(ref _green, value);
-                Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)Red, (byte)value, (byte)Blue));
             }
         }
     }
@@ -81,8 +79,8 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value != _blue)
             {
+                System.Diagnostics.Trace.WriteLine("Blue Change");
                 SetProperty(ref _blue, value);
-                Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)Red, (byte)Green, (byte)value));
             }
         }
     }
@@ -123,6 +121,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
     [RelayCommand]
     private void PickColor()
     {
+        System.Diagnostics.Trace.WriteLine("PickColor");
         Picking = true;
         Pinned = true;
         colorExtractor?.Activate(CaptureColor, FinishColor);
@@ -130,18 +129,26 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
 
     private void CaptureColor(SolidColorBrush colorBrush)
     {
-        System.Diagnostics.Trace.WriteLine("ColorPickerViewModel: CaptureColor");
-        Color = colorBrush;
+        if(!ColorUtil.Equals(Color, colorBrush))
+        {
+            System.Diagnostics.Trace.WriteLine("ColorPickerViewModel: CaptureColor");
+            Red = colorBrush.Color.R;
+            Green = colorBrush.Color.G;
+            Blue = colorBrush.Color.B;
+            Color = colorBrush;
+            NoteColor(colorBrush);
+        }
     }
 
     private void FinishColor()
     {
         Picking = false;
+        System.Diagnostics.Trace.WriteLine("FinishColor");
     }
 
     private void NoteColor(SolidColorBrush newColor)
     {
-        if(ColorHistories.Count() > 10)
+        if(ColorHistories.Count() > MAX_COLOR_HISTORIES)
         {
             ColorHistories.RemoveAt(0);
         }

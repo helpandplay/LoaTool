@@ -37,14 +37,14 @@ public class ColorExtractor
     {
         if(CaptureColor != null)
         {
-            System.Diagnostics.Trace.WriteLine("Mouse Down: Cature Color");
+            //System.Diagnostics.Trace.WriteLine("Mouse Down: Cature Color");
             SolidColorBrush colorBrush = GetPixelColorBrush(e);
             CaptureColor(colorBrush);
         }
         
         if(FinishColor != null)
         {
-            System.Diagnostics.Trace.WriteLine("Mouse Down: Finish Color");
+            //System.Diagnostics.Trace.WriteLine("Mouse Down: Finish Color");
             Mouse.OverrideCursor = Cursors.Arrow;
             FinishColor();
             DeActivate();
@@ -56,7 +56,7 @@ public class ColorExtractor
         
         if(CanCapture() && CaptureColor != null)
         {
-            System.Diagnostics.Trace.WriteLine("Mouse Move: Cature Color");
+            //System.Diagnostics.Trace.WriteLine("Mouse Move: Cature Color");
             SolidColorBrush colorBrush = GetPixelColorBrush(e);
             CaptureColor(colorBrush);
         }

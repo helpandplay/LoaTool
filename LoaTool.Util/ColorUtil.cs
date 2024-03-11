@@ -9,46 +9,13 @@ using System.Windows.Media;
 namespace LoaTool.Util;
 public partial class ColorUtil
 {
-    [LibraryImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial bool GetCursorPos(out POINT lpPoint);
-
-    public struct POINT
+    public static bool Equals(SolidColorBrush color1, SolidColorBrush color2)
     {
-        public int X;
-        public int Y;
+        return Equals(color1.Color, color2.Color);
     }
 
-    [LibraryImport("gdi32.dll", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    private static partial IntPtr CreateDC(string lpszDriver, string lpszDeviceName, string lpszOutput, int lpInitData);
-
-    [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
-    private static extern bool DeleteDC([In] IntPtr hdc);
-
-    [LibraryImport("gdi32.dll")]
-    private static partial uint GetPixel(IntPtr hdc, int nXPos, int nYPos);
-
-    private static Color GetColorAt(int x, int y)
+    public static bool Equals(Color color1, Color color2)
     {
-        IntPtr hdc = CreateDC("Display", lpszDeviceName: null, lpszOutput: null, 0);
-        uint pixel = GetPixel(hdc, x, y);
-        DeleteDC(hdc);
-        var color = Color.FromRgb(
-            (byte)( pixel & 0x000000FF ),
-            (byte)( ( pixel & 0x0000FF00 ) >> 8 ),
-            (byte)( ( pixel & 0x00FF0000 ) >> 16 )
-        );
-
-        return color;
-    }
-
-    public static Color GetColor()
-    {
-        if(GetCursorPos(out POINT lpPoint))
-        {
-            return GetColorAt(lpPoint.X, lpPoint.Y);
-        }
-
-        throw new InvalidOperationException("Failed to get the cursor position.");
+        return color1.R == color2.R && color1.G == color2.G && color1.B == color2.B;
     }
 }
