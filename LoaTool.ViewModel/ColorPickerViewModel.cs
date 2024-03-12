@@ -14,7 +14,7 @@ using CommunityToolkit.Mvvm.Input;
 using LoaTool.Define.Interfaces;
 using LoaTool.Define.Interfaces.Enums;
 using LoaTool.Define.Resources;
-using LoaTool.Define.Views.Enums;
+using LoaTool.Define.Structs;
 using LoaTool.Util;
 
 namespace LoaTool.ViewModel;
@@ -27,6 +27,8 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
     private bool _pinned;
     [ObservableProperty]
     private bool _picking;
+    [ObservableProperty]
+    private SolidColorBrush _colorInfoForeground;
 
     private SolidColorBrush _color = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
     public SolidColorBrush Color
@@ -51,7 +53,6 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value !=  _red)
             {
-                System.Diagnostics.Trace.WriteLine("Red Change");
                 SetProperty(ref _red, value);
             }
         }
@@ -65,7 +66,6 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value != _green)
             {
-                System.Diagnostics.Trace.WriteLine("Green Change");
                 SetProperty(ref _green, value);
             }
         }
@@ -79,7 +79,6 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             if(value != _blue)
             {
-                System.Diagnostics.Trace.WriteLine("Blue Change");
                 SetProperty(ref _blue, value);
             }
         }
@@ -127,16 +126,33 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         colorExtractor?.Activate(CaptureColor, FinishColor);
     }
 
+    [RelayCommand]
+    private void ChangeColorValue(RGBValueStruct rgbValueStruct)
+    {
+        switch(rgbValueStruct.Type)
+        {
+            case Define.Enums.RGB.Red:
+                CaptureColor(ColorUtil.CreateColor(rgbValueStruct.Value, Green, Blue));
+                break;
+            case Define.Enums.RGB.Green:
+                CaptureColor(ColorUtil.CreateColor(Red, rgbValueStruct.Value, Blue));
+                break;
+            case Define.Enums.RGB.Blue:
+                CaptureColor(ColorUtil.CreateColor(Red, Green, rgbValueStruct.Value));
+                break;
+        }
+    }
+
     private void CaptureColor(SolidColorBrush colorBrush)
     {
         if(!ColorUtil.Equals(Color, colorBrush))
         {
-            System.Diagnostics.Trace.WriteLine("ColorPickerViewModel: CaptureColor");
             Red = colorBrush.Color.R;
             Green = colorBrush.Color.G;
             Blue = colorBrush.Color.B;
             Color = colorBrush;
             NoteColor(colorBrush);
+            ColorInfoForeground = ColorUtil.GetForegroundColor(colorBrush.Color);
         }
     }
 

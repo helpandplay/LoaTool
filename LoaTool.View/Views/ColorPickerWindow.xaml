@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:LoaTool.View"
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
+        xmlns:converter="clr-namespace:LoaTool.View.Converters"
+        xmlns:enums="clr-namespace:LoaTool.Define.Enums;assembly=LoaTool.Define"
         mc:Ignorable="d"
         x:Name="ColorPicker"
         WindowStyle="{StaticResource AppWindowStyle}"
@@ -16,6 +18,12 @@
         AllowsTransparency="{StaticResource AppAllowsTransparency}"
         Topmost="{Binding Pinned}"
         >
+    <Window.Resources>
+        <converter:ColorValueConverter x:Key="ColorValueConverter"/>
+        <enums:RGB x:Key="RGB_Red">Red</enums:RGB>
+        <enums:RGB x:Key="RGB_Green">Green</enums:RGB>
+        <enums:RGB x:Key="RGB_Blue">Blue</enums:RGB>
+    </Window.Resources>
     <Window.DataContext>
         <vm:ColorPickerViewModel/>
     </Window.DataContext>
@@ -96,8 +104,10 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                        <Button Content="Pick" Style="{StaticResource IconContentButton}" Command="{Binding PickColorCommand}"/>
-                        <Button Content="Copy" Style="{StaticResource IconContentButton}"/>
+                        <Button Content="Pick" Style="{StaticResource IconContentButton}" Command="{Binding PickColorCommand}" 
+                                Foreground="{Binding ColorInfoForeground}"/>
+                        <Button Content="Copy" Style="{StaticResource IconContentButton}" 
+                                Foreground="{Binding ColorInfoForeground}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" Margin="30 10 0 0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
@@ -112,7 +122,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="R"/>
-                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Red}"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Red}"
+                                x:Name="Slider_Red">
+                            <behavior:Interaction.Triggers>
+                                <behavior:EventTrigger EventName="ValueChanged">
+                                    <behavior:InvokeCommandAction Command="{Binding ChangeColorValueCommand}">
+                                        <behavior:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ColorValueConverter}">
+                                                <Binding Source="{x:Static enums:RGB.Red}"/>
+                                                <Binding Path="Value" ElementName="Slider_Red"/>
+                                            </MultiBinding>
+                                        </behavior:InvokeCommandAction.CommandParameter>
+                                    </behavior:InvokeCommandAction>
+                                </behavior:EventTrigger>
+                            </behavior:Interaction.Triggers>
+                        </Slider>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -120,7 +144,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="G"/>
-                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Green}"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Green}"
+                                x:Name="Slider_Green">
+                            <behavior:Interaction.Triggers>
+                                <behavior:EventTrigger EventName="ValueChanged">
+                                    <behavior:InvokeCommandAction Command="{Binding ChangeColorValueCommand}">
+                                        <behavior:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ColorValueConverter}">
+                                                <Binding Source="{x:Static enums:RGB.Green}"/>
+                                                <Binding Path="Value" ElementName="Slider_Green"/>
+                                            </MultiBinding>
+                                        </behavior:InvokeCommandAction.CommandParameter>
+                                    </behavior:InvokeCommandAction>
+                                </behavior:EventTrigger>
+                            </behavior:Interaction.Triggers>
+                        </Slider>
                     </Grid>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
@@ -128,7 +166,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="B"/>
-                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Blue}"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Blue}"
+                                x:Name="Slider_Blue">
+                            <behavior:Interaction.Triggers>
+                                <behavior:EventTrigger EventName="ValueChanged">
+                                    <behavior:InvokeCommandAction Command="{Binding ChangeColorValueCommand}">
+                                        <behavior:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ColorValueConverter}">
+                                                <Binding Source="{x:Static enums:RGB.Blue}"/>
+                                                <Binding Path="Value" ElementName="Slider_Blue"/>
+                                            </MultiBinding>
+                                        </behavior:InvokeCommandAction.CommandParameter>
+                                    </behavior:InvokeCommandAction>
+                                </behavior:EventTrigger>
+                            </behavior:Interaction.Triggers>
+                        </Slider>
                     </Grid>
                 </Grid>
             </Grid>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoaTool.Define.Views.Enums
+namespace LoaTool.Define.Enums
 {
     public enum CustomCursors
     {

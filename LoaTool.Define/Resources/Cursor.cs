@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LoaTool.Define.Common;
+using LoaTool.Define.Enums;
 using LoaTool.Define.Interfaces.Enums;
-using LoaTool.Define.Views.Enums;
 
 namespace LoaTool.Define.Resources;
 public class Cursor : IResource
