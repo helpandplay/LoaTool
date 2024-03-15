@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Controls\" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
+    <Folder Include="Views\Controls\" />
   </ItemGroup>
 
 </Project>

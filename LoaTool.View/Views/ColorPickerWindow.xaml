@@ -69,7 +69,8 @@
                 </behavior:Interaction.Triggers>    
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Command="{Binding PinningCommand}">
+                    <Button Command="{Binding PinningCommand}"
+                            Cursor="Hand">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleBarButton}">
                                 <Style.Triggers>
@@ -91,7 +92,10 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource TitleBarButton}" Margin="5 0 0 0">
+                    <Button Style="{StaticResource TitleBarButton}" 
+                            Margin="5 0 0 0"
+                            Command="{Binding ExitCommand}"
+                            Cursor="Hand">
                         <Image Source="{StaticResource Icon_Close}"/>
                     </Button>
                 </StackPanel>
@@ -102,13 +106,21 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Background="{Binding Color}">
-                    <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Vertical"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                        <Button Content="Pick" Style="{StaticResource IconContentButton}" Command="{Binding PickColorCommand}" 
-                                Foreground="{Binding ColorInfoForeground}"/>
-                        <Button Content="Copy" Style="{StaticResource IconContentButton}" 
-                                Foreground="{Binding ColorInfoForeground}"/>
+                        <TextBlock Text="{Binding ColorHex}" Margin="0,0,0,10"
+                                   Foreground="{Binding ColorInfoForeground}"
+                                   TextAlignment="Center" FontSize="14"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Pick" 
+                                    Style="{StaticResource IconContentButton}" 
+                                    Command="{Binding PickColorCommand}" 
+                                    Foreground="{Binding ColorInfoForeground}"/>
+                            <Button Content="Copy" 
+                                    Style="{StaticResource IconContentButton}" 
+                                    Foreground="{Binding ColorInfoForeground}"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" Margin="30 10 0 0" VerticalAlignment="Center" HorizontalAlignment="Stretch">

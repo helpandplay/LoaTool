@@ -46,4 +46,31 @@ public partial class ColorUtil
     {
         return CreateColor(Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
     }
+
+    public static string RGBToHex(Color color)
+    {
+        return RGBToHex(color.R, color.G, color.B);
+    }
+
+    public static string RGBToHex(byte r, byte g, byte b)
+    {
+        return $"#{r.ToString("X2") + g.ToString("X2") + b.ToString("X2")}";
+    }
+
+    public static SolidColorBrush HexToRGB(string hexColor)
+    {
+        if(!hexColor.StartsWith("#") ||
+            hexColor.Length.Equals(7))
+        {
+            throw new InvalidOperationException(hexColor + " cannot convert Color.");
+        }
+
+        hexColor = hexColor.Replace("#", "");
+
+        byte r = Convert.ToByte(hexColor.Substring(0, 2), 16);
+        byte g = Convert.ToByte(hexColor.Substring(2, 2), 16);
+        byte b = Convert.ToByte(hexColor.Substring(4, 2), 16);
+
+        return CreateColor(r, g, b);
+    }
 }

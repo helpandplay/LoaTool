@@ -28,7 +28,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
     [ObservableProperty]
     private bool _picking;
     [ObservableProperty]
-    private SolidColorBrush _colorInfoForeground;
+    private SolidColorBrush _colorInfoForeground = ColorUtil.GetForegroundColor(Colors.White);
 
     private SolidColorBrush _color = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
     public SolidColorBrush Color
@@ -39,11 +39,14 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
             System.Windows.Media.Color color = _color.Color;
             if(color.R != value.Color.R || color.G != value.Color.G || color.B != value.Color.B)
             {
-                System.Diagnostics.Trace.WriteLine("Color Change");
                 SetProperty(ref _color, value);
+                ColorHex = ColorUtil.RGBToHex(color);
             }
         }
     }
+
+    [ObservableProperty]
+    public String _colorHex;
 
     private int _red;
     public int Red
