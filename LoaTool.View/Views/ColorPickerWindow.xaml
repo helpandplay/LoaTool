@@ -1,0 +1,195 @@
+﻿<Window x:Class="LoaTool.View.ColorPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoaTool.View"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:LoaTool.View.Behaviors"
+        xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
+        xmlns:converter="clr-namespace:LoaTool.View.Converters"
+        xmlns:enums="clr-namespace:LoaTool.Define.Enums;assembly=LoaTool.Define"
+        mc:Ignorable="d"
+        x:Name="ColorPicker"
+        WindowStyle="{StaticResource AppWindowStyle}"
+        Width="{StaticResource ColorPickerWidth}"
+        Height="{StaticResource ColorPickerHeight}"
+        ResizeMode="{StaticResource AppResizeMode}"
+        Background="{StaticResource AppBackground}"
+        AllowsTransparency="{StaticResource AppAllowsTransparency}"
+        Topmost="{Binding Pinned}"
+        >
+    <Window.Resources>
+        <converter:ColorValueConverter x:Key="ColorValueConverter"/>
+        <enums:RGB x:Key="RGB_Red">Red</enums:RGB>
+        <enums:RGB x:Key="RGB_Green">Green</enums:RGB>
+        <enums:RGB x:Key="RGB_Blue">Blue</enums:RGB>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:ColorPickerViewModel/>
+    </Window.DataContext>
+    <behavior:Interaction.Triggers>
+        <behavior:EventTrigger EventName="Deactivated">
+            <behavior:InvokeCommandAction Command="{Binding ExitCommand}"/>
+        </behavior:EventTrigger>
+        <behavior:EventTrigger EventName="Loaded">
+            <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
+        </behavior:EventTrigger>
+    </behavior:Interaction.Triggers>
+    <Border Padding="15 5" CornerRadius="10" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <TextBlock Text="Color Picker" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Cursor" Value="{StaticResource CursorGrabbing}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="MouseEnter">
+                        <behavior:InvokeCommandAction Command="{Binding ReadyDragCommand}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="MouseLeave">
+                        <behavior:InvokeCommandAction Command="{Binding NoReadyDragCommand}"/>
+                    </behavior:EventTrigger>
+                    <behavior:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <behavior:InvokeCommandAction Command="{Binding ActiveDragCommand}" CommandParameter="{Binding ElementName=ColorPicker}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>    
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Command="{Binding PinningCommand}"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleBarButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Pinned}" Value="False">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <Image Source="{StaticResource Icon_Pin}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Pinned}" Value="True">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <Image Source="{StaticResource Icon_UnPin}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Style="{StaticResource TitleBarButton}" 
+                            Margin="5 0 0 0"
+                            Command="{Binding ExitCommand}"
+                            Cursor="Hand">
+                        <Image Source="{StaticResource Icon_Close}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="{Binding Color}">
+                    <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="{Binding ColorHex}" Margin="0,0,0,10"
+                                   Foreground="{Binding ColorInfoForeground}"
+                                   TextAlignment="Center" FontSize="14"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Pick" 
+                                    Style="{StaticResource IconContentButton}" 
+                                    Command="{Binding PickColorCommand}" 
+                                    Foreground="{Binding ColorInfoForeground}"/>
+                            <Button Content="Copy" 
+                                    Style="{StaticResource IconContentButton}" 
+                                    Foreground="{Binding ColorInfoForeground}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Margin="30 10 0 0" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="R"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Red}"
+                                x:Name="Slider_Red">
+                            <behavior:Interaction.Behaviors>
+                                <behaviors:ColorValueBehavior Color="Red" Command="{Binding ChangeColorValueCommand}"/>
+                            </behavior:Interaction.Behaviors>
+                        </Slider>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="G"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Green}"
+                                x:Name="Slider_Green">
+                            <behavior:Interaction.Behaviors>
+                                <behaviors:ColorValueBehavior Color="Green" Command="{Binding ChangeColorValueCommand}"/>
+                            </behavior:Interaction.Behaviors>
+                        </Slider>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="B"/>
+                        <Slider Grid.Column="1" Margin="10 0 0 0" Maximum="255" Minimum="0" Value="{Binding Blue}"
+                                x:Name="Slider_Blue">
+                            <behavior:Interaction.Behaviors>
+                                <behaviors:ColorValueBehavior Color="Blue" Command="{Binding ChangeColorValueCommand}"/>
+                            </behavior:Interaction.Behaviors>
+                        </Slider>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0 10 0 0" HorizontalAlignment="Left">
+                <ItemsControl ItemsSource="{Binding ColorHistories}"
+                              FlowDirection="LeftToRight">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                            <ItemsPresenter/>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding}" Width="20" Height="20" BorderThickness="1"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
