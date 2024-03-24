@@ -46,7 +46,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
     }
 
     [ObservableProperty]
-    public String _colorHex;
+    public string _colorHex;
 
     private int _red;
     public int Red
@@ -93,6 +93,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
     public ColorPickerViewModel()
     {
         this.colorExtractor = Ioc.Default.GetService<ColorExtractor>();
+        ColorHex = ColorUtil.RGBToHex(Colors.Black);
     }
 
     [RelayCommand]
@@ -111,6 +112,9 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         {
             IDialog mainDialog = _dialogService.GetDialog<MainViewModel>();
             dialog.Positioning(mainDialog);
+
+            Color = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
+            ColorInfoForeground = ColorUtil.GetForegroundColor(Colors.White);
         }
     }
 

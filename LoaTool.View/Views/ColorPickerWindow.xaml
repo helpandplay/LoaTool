@@ -109,9 +109,17 @@
                     <StackPanel Orientation="Vertical"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                        <TextBlock Text="{Binding ColorHex}" Margin="0,0,0,10"
-                                   Foreground="{Binding ColorInfoForeground}"
-                                   TextAlignment="Center" FontSize="14"/>
+                        <TextBox Text="{Binding ColorHex}" 
+                                 Foreground="{Binding ColorInfoForeground}">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Margin" Value="0,0,0,10"/>
+                                    <Setter Property="TextAlignment" Value="Center"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                         <StackPanel Orientation="Horizontal">
                             <Button Content="Pick" 
                                     Style="{StaticResource IconContentButton}" 

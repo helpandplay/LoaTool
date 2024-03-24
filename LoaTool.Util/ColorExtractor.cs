@@ -14,7 +14,7 @@ using DrawingColor = System.Drawing.Color;
 namespace LoaTool.Util;
 public class ColorExtractor
 {
-    private IKeyboardMouseEvents _mouseHook;
+    private IKeyboardMouseEvents? _mouseHook;
 
     private Action<SolidColorBrush>? CaptureColor { get; set; }
     private Action? FinishColor { get; set; }
@@ -76,13 +76,17 @@ public class ColorExtractor
 
     public void DeActivate()
     {
-        _mouseHook.MouseMove -= MouseMoveHooker;
-        _mouseHook.MouseDown -= MouseDownHooker;
+        if(_mouseHook != null)
+        {
+            _mouseHook.MouseMove -= MouseMoveHooker;
+            _mouseHook.MouseDown -= MouseDownHooker;
+
+            _mouseHook.Dispose();
+        }
 
         CaptureColor = null;
         FinishColor = null;
 
-        _mouseHook.Dispose();
         System.Diagnostics.Trace.WriteLine("Color Extractor: DeActivate");
     }
 
