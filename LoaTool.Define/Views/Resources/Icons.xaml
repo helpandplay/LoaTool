@@ -14,6 +14,13 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    <DrawingImage x:Key="Icon_Calculate">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M24,24z M0,0z M21,2L21,22 3,22 3,2 21,2z M23,0L1,0 1,24 23,24 23,0z M20,3L4,3 4,8 20,8 20,3z M7,10L4,10 4,13 7,13 7,10z M11,10L8,10 8,13 11,13 11,10z M15,10L12,10 12,13 15,13 15,10z M20,10L17,10 17,13 20,13 20,10z M7,14L4,14 4,17 7,17 7,14z M11,14L8,14 8,17 11,17 11,14z M15,14L12,14 12,17 15,17 15,14z M20,14L17,14 17,21 20,21 20,14z M7,18L4,18 4,21 7,21 7,18z M11,18L8,18 8,21 11,21 11,18z M15,18L12,18 12,21 15,21 15,18z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
     <DrawingImage x:Key="Icon_Close">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">

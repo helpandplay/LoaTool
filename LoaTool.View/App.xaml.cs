@@ -1,14 +1,10 @@
-﻿using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using LoaTool.Define.Common;
 using LoaTool.Define.Enums;
 using LoaTool.Define.Interfaces;
-using LoaTool.Define.Resources;
+using LoaTool.Service;
 using LoaTool.Util;
+using LoaTool.View.Views;
 using LoaTool.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -68,22 +64,30 @@ public sealed partial class App : Application
         }
     }
 
-    private void RegistServices()
+    private static void RegistServices()
     {
         var services = new ServiceCollection();
 
-        services.AddSingleton<ColorExtractor>();
+        //ViewModel
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ColorPickerViewModel>();
+        services.AddSingleton<AuctionViewModel>();
+
+        //Util
+        services.AddSingleton<ColorExtractor>();
+
+        //Service
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IResourceService, ResourceService>();
+        services.AddSingleton<AuctionService>();
 
+        //Build
         ServiceProvider serviceProvider = services.BuildServiceProvider();
 
         Ioc.Default.ConfigureServices(serviceProvider);
     }
 
-    private void RegistDialog()
+    private static void RegistDialog()
     {
         IDialogService? dialogService = Ioc.Default.GetService<IDialogService>();
 
@@ -91,6 +95,7 @@ public sealed partial class App : Application
         {
             dialogService.Register<MainWindow>();
             dialogService.Register<ColorPickerWindow>();
+            dialogService.Register<AuctionWindow>();
         }
     }
 }

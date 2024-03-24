@@ -12,11 +12,12 @@ namespace LoaTool.ViewModel;
 
 public partial class MainViewModel : DialogViewModelBase, IContext
 {
-    private readonly ColorPickerViewModel colorPickerViewModel;
+    private readonly IDictionary<Type, IContext> _viewModels = new Dictionary<Type, IContext>();
 
-    public MainViewModel(ColorPickerViewModel colorPickerViewModel)
+    public MainViewModel(ColorPickerViewModel colorPickerViewModel, AuctionViewModel auctionViewModel)
     {
-        this.colorPickerViewModel = colorPickerViewModel;
+        _viewModels.Add(typeof(ColorPickerViewModel), colorPickerViewModel);
+        _viewModels.Add(typeof(AuctionViewModel), auctionViewModel);
     }
 
     [RelayCommand]
@@ -28,7 +29,27 @@ public partial class MainViewModel : DialogViewModelBase, IContext
     [RelayCommand]
     private void RunColorPicker()
     {
-        _dialogService.Show(colorPickerViewModel);
+        if(_viewModels.ContainsKey(typeof(ColorPickerViewModel)))
+        {
+            IContext colorPickerViewModel = _viewModels[typeof(ColorPickerViewModel)];
+            if(colorPickerViewModel != null)
+            {
+                _dialogService.Show(colorPickerViewModel);
+            }
+        }
+    }
+
+    [RelayCommand]
+    private void RunCalculate()
+    {
+        if(_viewModels.ContainsKey(typeof(ColorPickerViewModel)))
+        {
+            IContext auctionViewModel = _viewModels[typeof(AuctionViewModel)];
+            if(auctionViewModel != null)
+            {
+                _dialogService.Show(auctionViewModel);
+            }
+        }
     }
 }
 

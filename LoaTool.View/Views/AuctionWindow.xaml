@@ -1,0 +1,73 @@
+﻿<Window x:Class="LoaTool.View.Views.AuctionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoaTool.View.Views"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:LoaTool.View.Behaviors"
+        xmlns:vm="clr-namespace:LoaTool.ViewModel;assembly=LoaTool.ViewModel"
+        xmlns:converter="clr-namespace:LoaTool.View.Converters"
+        xmlns:enums="clr-namespace:LoaTool.Define.Enums;assembly=LoaTool.Define"
+        mc:Ignorable="d"
+        x:Name="Auction"
+        WindowStyle="{StaticResource AppWindowStyle}"
+        Width="{StaticResource ColorPickerWidth}"
+        Height="{StaticResource ColorPickerHeight}"
+        ResizeMode="{StaticResource AppResizeMode}"
+        Background="{StaticResource AppBackground}"
+        AllowsTransparency="{StaticResource AppAllowsTransparency}"
+        Title="Auction">
+    <Window.DataContext>
+        <vm:AuctionViewModel/>
+    </Window.DataContext>
+    <behavior:Interaction.Triggers>
+        <behavior:EventTrigger EventName="Loaded">
+            <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=Auction}"/>
+        </behavior:EventTrigger>
+    </behavior:Interaction.Triggers>
+    <Border Padding="15 5" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0" Text="{Binding Price, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="TextAlignment" Value="Left"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="4인"/>
+                    <TextBlock Text="{Binding AuctionPerFour}" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="8인"/>
+                    <TextBlock Text="{Binding AuctionPerEight}" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="16인"/>
+                    <TextBlock Text="{Binding AuctionPerSixteen}" Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

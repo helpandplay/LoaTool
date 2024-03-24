@@ -60,6 +60,10 @@
                         Command="{Binding RunColorPickerCommand}">
                     <Image Source="{StaticResource Icon_ColorPicker}"/>
                 </Button>
+                <Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}"
+                        Command="{Binding RunCalculateCommand}">
+                    <Image Source="{StaticResource Icon_Calculate}"/>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Border>
