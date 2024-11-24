@@ -1,6 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using LoaTool.Define.Enums;
 using LoaTool.Define.Interfaces;
 using LoaTool.Service;
 using LoaTool.Util;
@@ -26,9 +28,9 @@ public partial class AuctionViewModel : DialogViewModelBase, IContext
                     int.TryParse(value, out int price))
                 {
                     System.Diagnostics.Trace.WriteLine("Price: " + price);
-                    AuctionPerFour = _auctionService.Calculate(price, 4).ToString();
-                    AuctionPerEight = _auctionService.Calculate(price, 8).ToString();
-                    AuctionPerSixteen = _auctionService.Calculate(price, 16).ToString();
+                    AuctionPerFour = GenerateCalculateResultString(_auctionService.Calculate(price, 4));
+                    AuctionPerEight = GenerateCalculateResultString(_auctionService.Calculate(price, 8));
+                    AuctionPerSixteen = GenerateCalculateResultString(_auctionService.Calculate(price, 16));
                 }
             }
         }
@@ -54,5 +56,21 @@ public partial class AuctionViewModel : DialogViewModelBase, IContext
             IDialog mainDialog = _dialogService.GetDialog<MainViewModel>();
             dialog.Positioning(mainDialog);
         }
+    }
+
+    [RelayCommand]
+    private void Exit()
+    {
+        if(_dialogService != null)
+        {
+            _dialogService.Close(this);
+        }
+    }
+
+    private static string GenerateCalculateResultString(int[] results)
+    {
+        //0: result
+        //1: recommand
+        return "손익분기점 - " + results[0] + ", 경매추천가 - " + results[1];
     }
 }

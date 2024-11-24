@@ -25,6 +25,9 @@
         <behavior:EventTrigger EventName="Loaded">
             <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=Auction}"/>
         </behavior:EventTrigger>
+        <behavior:EventTrigger EventName="Deactivated">
+            <behavior:InvokeCommandAction Command="{Binding ExitCommand}"/>
+        </behavior:EventTrigger>
     </behavior:Interaction.Triggers>
     <Border Padding="15 5" CornerRadius="10" Background="Black">
         <Grid>
