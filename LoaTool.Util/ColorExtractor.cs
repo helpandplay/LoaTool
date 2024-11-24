@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Gma.System.MouseKeyHook;
 using LoaTool.Define.Colors;
-
+using DrawingColor = System.Drawing.Color;
 using MediaColor = System.Windows.Media.Color;
 using SolidColorBrush = System.Windows.Media.SolidColorBrush;
-using DrawingColor = System.Drawing.Color;
 
 namespace LoaTool.Util;
 public class ColorExtractor
@@ -41,7 +35,7 @@ public class ColorExtractor
             SolidColorBrush colorBrush = GetPixelColorBrush(e);
             CaptureColor(colorBrush);
         }
-        
+
         if(FinishColor != null)
         {
             //System.Diagnostics.Trace.WriteLine("Mouse Down: Finish Color");
@@ -53,7 +47,7 @@ public class ColorExtractor
 
     private void MouseMoveHooker(object? sender, System.Windows.Forms.MouseEventArgs e)
     {
-        
+
         if(CanCapture() && CaptureColor != null)
         {
             //System.Diagnostics.Trace.WriteLine("Mouse Move: Cature Color");

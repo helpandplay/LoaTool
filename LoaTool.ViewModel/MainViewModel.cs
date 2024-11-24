@@ -1,23 +1,22 @@
-
-using System.Windows;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using LoaTool.Define.Interfaces;
-using LoaTool.Define.View;
-using LoaTool.Util;
+using LoaTool.Service;
 
 namespace LoaTool.ViewModel;
 
 public partial class MainViewModel : DialogViewModelBase, IContext
 {
     private readonly IDictionary<Type, IContext> _viewModels = new Dictionary<Type, IContext>();
-
-    public MainViewModel(ColorPickerViewModel colorPickerViewModel, AuctionViewModel auctionViewModel)
+    private readonly LostarkService lostark;
+    public MainViewModel(
+        ColorPickerViewModel colorPickerViewModel,
+        AuctionViewModel auctionViewModel)
     {
         _viewModels.Add(typeof(ColorPickerViewModel), colorPickerViewModel);
         _viewModels.Add(typeof(AuctionViewModel), auctionViewModel);
+
+        this.lostark = Ioc.Default.GetService<LostarkService>();
     }
 
     [RelayCommand]
@@ -50,6 +49,12 @@ public partial class MainViewModel : DialogViewModelBase, IContext
                 _dialogService.Show(auctionViewModel);
             }
         }
+    }
+
+    [RelayCommand]
+    private void ApiTest()
+    {
+        lostark.getData();
     }
 }
 

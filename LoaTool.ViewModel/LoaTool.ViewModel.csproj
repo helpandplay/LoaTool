@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LoaTool.Define\LoaTool.Define.csproj" />
+    <ProjectReference Include="..\LoaTool.Service\LoaTool.Service.csproj" />
     <ProjectReference Include="..\LoaTool.Util\LoaTool.Util.csproj" />
   </ItemGroup>
 

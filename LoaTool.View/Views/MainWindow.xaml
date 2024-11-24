@@ -19,20 +19,23 @@
         Height="{StaticResource AppHeight}"
         Opacity="{StaticResource AppOpacity}"
         >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconMainButton}"/>
+    </Window.Resources>
     <behavior:Interaction.Triggers>
         <behavior:EventTrigger EventName="Loaded">
             <behavior:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
         </behavior:EventTrigger>
     </behavior:Interaction.Triggers>
     <Border CornerRadius="{StaticResource AppCornerRadius}" 
-            Background="Blue" 
-            Padding="{StaticResource AppPadding}">
+            Padding="{StaticResource AppPadding}"
+            Background="White">
         <StackPanel Orientation="Horizontal"
                     Margin="10,0,10,0">
             <Button Width="{StaticResource IconWidth}" 
                     Height="{StaticResource IconHeight}">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButton}">
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconMainButton}">
                         <Setter Property="Cursor" Value="{StaticResource CursorGrab}"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsClickLeftMouseButton, UpdateSourceTrigger=PropertyChanged}" Value="True">
@@ -64,6 +67,10 @@
                         Command="{Binding RunCalculateCommand}">
                     <Image Source="{StaticResource Icon_Calculate}"/>
                 </Button>
+                <!--<Button Width="{StaticResource IconWidth}" Height="{StaticResource IconHeight}"
+                        Command="{Binding ApiTestCommand}">
+                    <Image Source="{StaticResource Icon_Calculate}"/>
+                </Button>-->
             </StackPanel>
         </StackPanel>
     </Border>

@@ -44,7 +44,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         get => _red;
         set
         {
-            if(value !=  _red)
+            if(value != _red)
             {
                 SetProperty(ref _red, value);
             }
@@ -92,7 +92,7 @@ public partial class ColorPickerViewModel : DialogViewModelBase, IContext
         if(_dialogService != null && !Pinned)
         {
             _dialogService.Close(this);
-        } 
+        }
     }
 
     [RelayCommand]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LoaTool.Define.Enums;
+﻿using LoaTool.Define.Enums;
 
 namespace LoaTool.Define.Structs;
 public class RGBValueStruct

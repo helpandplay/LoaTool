@@ -12,7 +12,7 @@ public class DialogService : IDialogService
 
     public void Clear()
     {
-        foreach (var item in _openedDialogs)
+        foreach(var item in _openedDialogs)
         {
             try
             {
@@ -114,13 +114,13 @@ public class DialogService : IDialogService
                 dialog.DataContext = null;
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex.Message);
         }
         finally
         {
-            foreach (var dialog in opened)
+            foreach(var dialog in opened)
             {
                 this._openedDialogs.Remove(dialog);
             }

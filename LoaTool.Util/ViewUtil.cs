@@ -9,7 +9,7 @@ public partial class ViewUtil
     {
         double windowWidth = SystemParameters.WorkArea.Width;
 
-        double applicationLeft = (windowWidth / 2) - (applicationWidth / 2);
+        double applicationLeft = ( windowWidth / 2 ) - ( applicationWidth / 2 );
 
         return new WindowLocation(applicationTop, applicationLeft);
     }

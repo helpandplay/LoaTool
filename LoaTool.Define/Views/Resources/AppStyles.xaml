@@ -20,9 +20,29 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="Button" x:Key="IconMainButton" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style TargetType="Button" x:Key="IconContentButton" BasedOn="{StaticResource IconButton}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Margin" Value="10 0"/>
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
     <Style TargetType="Slider" x:Key="SliderStyle">
@@ -31,23 +51,18 @@
                 <ControlTemplate TargetType="Thumb">
                     <Ellipse x:Name="Ellipse" StrokeThickness="1">
                         <Ellipse.Stroke>
-                            <LinearGradientBrush StartPoint="0,0"
-                                 EndPoint="0,1">
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <LinearGradientBrush.GradientStops>
                                     <GradientStopCollection>
-                                        <GradientStop Color="{DynamicResource BorderLightColor}"
-                                Offset="0.0" />
-                                        <GradientStop Color="{DynamicResource BorderDarkColor}"
-                                Offset="1.0" />
+                                        <GradientStop Color="{DynamicResource BorderLightColor}" Offset="0.0" />
+                                        <GradientStop Color="{DynamicResource BorderDarkColor}" Offset="1.0" />
                                     </GradientStopCollection>
                                 </LinearGradientBrush.GradientStops>
                             </LinearGradientBrush>
                         </Ellipse.Stroke>
                         <Ellipse.Fill>
-                            <LinearGradientBrush EndPoint="0.5,1"
-                                 StartPoint="0.5,0">
-                                <GradientStop Color="{DynamicResource ControlMediumColor}"
-                            Offset="1" />
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{DynamicResource ControlMediumColor}" Offset="1" />
                                 <GradientStop Color="{DynamicResource ControlLightColor}" />
                             </LinearGradientBrush>
                         </Ellipse.Fill>

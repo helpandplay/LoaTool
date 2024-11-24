@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using LoaTool.Define.Enums;
@@ -40,7 +35,7 @@ namespace LoaTool.View.Converters
             }
 
             if(values[0] is RGB rgb &&
-               (values[1] is int value))
+               ( values[1] is int value ))
             {
                 return new RGBValueStruct(rgb, value);
             }

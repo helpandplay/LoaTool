@@ -56,7 +56,7 @@ public sealed partial class App : Application
         //NOTE: enum은 Enum을 상속하지 않음. 따라서 타입을 인터페이스로 통일하고 클래스로 타입구별해야함. IResource -> Image, Cursor, Audio ...
         var cursorGrabResource = new Define.Resources.Cursor(cursorGrabResourcePath, CustomCursors.Grab);
         var cursorGrabbingResource = new Define.Resources.Cursor(cursorGrabbingResourcePath, CustomCursors.Grabbing);
-        
+
         if(resourceService != null)
         {
             resourceService.AddResource(cursorGrabResource);
@@ -80,6 +80,7 @@ public sealed partial class App : Application
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IResourceService, ResourceService>();
         services.AddSingleton<AuctionService>();
+        services.AddSingleton<LostarkService>();
 
         //Build
         ServiceProvider serviceProvider = services.BuildServiceProvider();

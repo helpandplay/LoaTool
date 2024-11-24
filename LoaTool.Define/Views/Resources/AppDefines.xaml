@@ -21,4 +21,7 @@
 
     <sys:Double x:Key="ColorPickerWidth">400</sys:Double>
     <sys:Double x:Key="ColorPickerHeight">200</sys:Double>
+
+    <sys:Double x:Key="AuctionWidth">300</sys:Double>
+    <sys:Double x:Key="AuctionHeight">200</sys:Double>
 </ResourceDictionary>

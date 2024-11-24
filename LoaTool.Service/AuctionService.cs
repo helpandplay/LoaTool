@@ -1,10 +1,12 @@
 ﻿namespace LoaTool.Service;
 public class AuctionService
 {
-    private readonly double TAX = 0.05; 
+    private readonly double TAX = 0.05;
 
-    public int Calculate(int price, int per)
+    public int Calculate(int price, double per)
     {
-        return Convert.ToInt32(Math.Ceiling(price * ( 1 - TAX ) * ( ( per - 1 ) / per )));
+        double result = Math.Ceiling(price * ( 1 - TAX ) * ( ( per - 1 ) / per ));
+        System.Diagnostics.Trace.WriteLine("Auction: " + result);
+        return Convert.ToInt32(result);
     }
 }
